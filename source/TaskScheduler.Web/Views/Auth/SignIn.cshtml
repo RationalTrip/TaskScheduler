@@ -1,0 +1,53 @@
+﻿@model LoginAuthSignInModel
+@{
+    var errorMessages = ViewData[WebCommon.ErrorBag];
+}
+
+<h1>Sign in</h1>
+
+<partial name="_info" />
+
+<div asp-validation-summary="ModelOnly"></div>
+<div>
+    <form method="post" asp-action="@AuthController.SIGN_IN_ROUTE" asp-controller="@AuthController.CONTROLLER_ROUTE">
+        <div>
+            <div class="container my-4">
+                <label for="Login" class="form-label">Login:</label>
+
+                <div class="input-group">
+                    <input class="form-control" asp-for="Login" />
+
+                    <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                        <span class="span-validator d-none" asp-validation-for="Login"></span>
+                        <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <label for="Password" class="form-label">Password:</label>
+
+                <div class="input-group">
+                    <input class="form-control" asp-for="Password" type="password" />
+
+                    <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                        <span class="span-validator d-none" asp-validation-for="Password"></span>
+                        <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <input type="submit" value="submit" class="btn btn-outline-secondary" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    @*<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/hideable-validation-popovers.js"></script>*@
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ScheduleTask>
+@{
+    string userLogin = Context.User.Identity.Name;
+}
+<h1>Participated Tasks</h1>
+
+<partial name="_info" />
+
+@if(Model is null || Model.Count() == 0)
+{
+    <div class="container">
+        You have no participated tasks.
+    </div>
+}
+
+<div class="container">
+    @foreach (var scheduleTask in Model)
+    {
+        <div class="container my-3 mx-2 border border-dark rounded"
+             @Html.Raw($"onclick=\"location.href='/{ScheduleTaskController.CONTROLLER_ROUTE}/{ScheduleTaskController.GET_SCHEDULE_TASK_ROUTE}/{scheduleTask.Link}';\" style=\"cursor: pointer;\"")>
+            <partial name="_taskScheduleShort" model="@scheduleTask" />
+            <div class="row">
+                <div class="col-6 col-sm-7 col-md-8"></div>
+                <div class="col">
+                    @Html.Raw(scheduleTask.Owner.LoginAuth.Login == userLogin ? "You are this tasks owner." : $"This tasks owner is: {scheduleTask.Owner.LoginAuth.Login}")
+                </div>
+            </div>
+        </div>
+    }
+</div>

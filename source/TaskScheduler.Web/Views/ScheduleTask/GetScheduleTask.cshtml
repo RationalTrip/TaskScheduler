@@ -1,0 +1,111 @@
+﻿@model ScheduleTask
+
+<h1>
+    <i class="bi bi-circle-fill @Html.Raw(Model.TaskPriority == TaskPriority.HighPriority ? "text-danger" :(Model.TaskPriority == TaskPriority.NormalPriority? "text-warning" : "text-success"))"
+       title="@Html.Raw(Model.TaskPriority == TaskPriority.HighPriority ? "High priority Task" :(Model.TaskPriority == TaskPriority.NormalPriority? "Normal priority Task" : "Low priority Task"))"></i>
+    @Model.Title
+</h1>
+
+<div class="container d-flex justify-content-end justify-content justify-content-lg-around">
+    <div></div>
+
+    <div>
+        <div>
+            <button class="btn btn-outline-secondary" id="copy-link">
+                Copy link
+                <i class="bi bi-clipboard"></i>
+            </button>
+        </div>
+
+        <div class="position-fixed top-0 start-50 translate-middle-x" id="notification" style="display: none;">
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> Link was copied.
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_info" />
+
+<div class="container my-4">
+    <p class="my-4">@Model.Description</p>
+
+    <p class="my-4">
+        Task duration is from @Model.TaskStart.ToString("HH:mm dd.MM.yyyy") to @Model.TaskEnd.ToString("HH:mm dd.MM.yyyy")
+    </p>
+    @if (Model.IsRepetitive)
+    {
+        <p class="my-4">
+            Is repetitive is from @Model.RepetitiveStart.ToString("dd.MM.yyyy") to @Model.RepetitiveEnd.ToString("dd.MM.yyyy").
+            And repeats every @switch (Model.RepetitivePeriod)
+            {
+                case TaskRepetitivePeriod.Daily:<span>day.</span>
+                    break;
+                case TaskRepetitivePeriod.Weekly: <span>week.</span>
+                    break;
+                case TaskRepetitivePeriod.Monthly: <span>month.</span>
+                    break;
+                case TaskRepetitivePeriod.Yearly: <span>year.</span>
+                    break;
+            }
+        </p>
+    }
+
+    @{
+        string authUserLogin = Context.User?.Identity?.Name ?? "";
+
+        bool isAuthenticatedUserParticipated = false;
+        if (Context.User?.Identity?.IsAuthenticated ?? false)
+        {
+            isAuthenticatedUserParticipated = Model.Participants.Where(user => user.LoginAuth.Login == authUserLogin).Any();
+        }
+
+        int participatedExpextYou = Model.Participants.Count;
+    }
+
+    <div class="row my-4">
+        <div class="col-6">
+            @if (authUserLogin == Model.Owner.LoginAuth.Login)
+            {
+                <p my-2>
+                    You are the owner of this Task.
+                </p>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="@ScheduleTaskController.CONTROLLER_ROUTE" 
+                   asp-action="@ScheduleTaskController.DELETE_SCHEDULE_TASK_ROUTE" asp-route-arg="@Model.Link">Delete Task</a>
+            }
+            else
+            {
+                <p>
+                    Owner: @Model.Owner.LoginAuth.Login
+                </p>
+            }
+        </div>
+
+        <div class="col-6">
+            @if (isAuthenticatedUserParticipated)
+            {
+                <p my-2>
+                    You already participate this task, @Html.Raw(participatedExpextYou > 1 ? $"as the anouther {participatedExpextYou - 1} users do" : "but no one else participate")
+                </p>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="@ScheduleTaskController.CONTROLLER_ROUTE"
+                   asp-action="@ScheduleTaskController.LEAVE_SCHEDULE_TASK_ROUTE" asp-route-arg="@Model.Link">Leave Task</a>
+            }
+            else
+            {
+
+                <p my-2>
+                    @Html.Raw(participatedExpextYou > 0 ? $"{participatedExpextYou} users already participate this task." : "That task hasn't had any participants yet.")
+                </p>
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-sm btn-outline-secondary" asp-controller="@ScheduleTaskController.CONTROLLER_ROUTE"
+                       asp-action="@ScheduleTaskController.PARTICIPATE_SCHEDULE_TASK_ROUTE" asp-route-arg="@Model.Link">Participate Task</a>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/copy-to-clipboard.js"></script>
+}

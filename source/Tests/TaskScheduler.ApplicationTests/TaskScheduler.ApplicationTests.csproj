@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidConfirmPasswordData.json" Link="TestData\LoginAuthRegisterModelInValidConfirmPasswordData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginAndPasswordData.json" Link="TestData\LoginAuthRegisterModelInValidLoginAndPasswordData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginData.json" Link="TestData\LoginAuthRegisterModelInValidLoginData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidPasswordData.json" Link="TestData\LoginAuthRegisterModelInValidPasswordData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelValidData.json" Link="TestData\LoginAuthRegisterModelValidData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginAndPasswordData.json" Link="TestData\LoginAuthSignInModelInValidLoginAndPasswordData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginData.json" Link="TestData\LoginAuthSignInModelInValidLoginData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidPasswordData.json" Link="TestData\LoginAuthSignInModelInValidPasswordData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\LoginAuthSignInModel\LoginAuthSignInModelValidData.json" Link="TestData\LoginAuthSignInModelValidData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPeriod.json" Link="TestData\ScheduleTaskCreateModelInValidPeriod.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPriorityData.json" Link="TestData\ScheduleTaskCreateModelInValidPriorityData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidStartRepetitiveTimeData.json" Link="TestData\ScheduleTaskCreateModelInValidStartRepetitiveTimeData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidStartTimeData.json" Link="TestData\ScheduleTaskCreateModelInValidStartTimeData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidTitleData.json" Link="TestData\ScheduleTaskCreateModelInValidTitleData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelValidData.json" Link="TestData\ScheduleTaskCreateModelValidData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskLink\ScheduleTaskLinkInValidData.json" Link="TestData\ScheduleTaskLinkInValidData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\TestData\ScheduleTaskLink\ScheduleTaskLinkValidData.json" Link="TestData\ScheduleTaskLinkValidData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Moq" Version="4.18.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestData\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TaskScheduler.Application\TaskScheduler.Application.csproj" />
+  </ItemGroup>
+
+</Project>

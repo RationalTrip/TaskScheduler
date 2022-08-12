@@ -1,0 +1,122 @@
+﻿@model IEnumerable<IndividualTask>
+@{
+    DateTime calendarDate = (DateTime)ViewData[WebCommon.CurrentCalendarDate];
+
+    DateTime calendarIterator = calendarDate.AddDays(-(int)calendarDate.DayOfWeek);
+
+    int nextMonth = calendarDate.AddMonths(1).Month;
+}
+
+<h1>
+    Calendar for @Html.Raw(calendarDate.Year == DateTime.Today.Year && calendarDate.Month == DateTime.Today.Month ? "currrent month" : "")
+    @calendarDate.ToString("MMMM yyyy", CultureInfo.InvariantCulture)
+</h1>
+
+<partial name="_info" />
+
+<div class="container-fluid my-4">
+    <div class="container my-1">
+        <h1 class="text-center">
+            <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_YEAR_ROUTE" 
+            asp-route-arg="@($"{calendarDate.Year}")" class="text-decoration-none">
+                @calendarDate.Year
+            </a>
+        </h1>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_MONTH_ROUTE" asp-route-arg="@($"{calendarDate.AddMonths(-1).Month}-{calendarDate.AddMonths(-1).Year}")">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </div>
+    
+            <div class="col-4 col-sm-3 col-md-2 text-dark text-center h3">
+                @calendarDate.ToString("MMMM", CultureInfo.InvariantCulture)
+            </div>
+    
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_MONTH_ROUTE" asp-route-arg="@($"{calendarDate.AddMonths(1).Month}-{calendarDate.AddMonths(1).Year}")">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="container">
+        <thead>
+            <tr>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td class="custom-col-sm-7 d-none d-sm-table-cell border-right border-bottom border-left border-dark text-center">
+                        @Html.Raw(calendarIterator.AddDays(i).ToString("dddd", CultureInfo.InvariantCulture))
+                    </td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @while (calendarIterator.Month != nextMonth)
+            {
+                <tr>
+                    @for (int i = 0; i < 7; i++, calendarIterator = calendarIterator.AddDays(1))
+                    {
+                        DrawDay(calendarIterator, calendarDate.Month);
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@functions{
+    void DrawDay(DateTime curDay, int curMonth)
+    {
+        <td class="m-1 m-sm-0 p-1 p-sm-0 custom-col-sm-7 border border-dark rounded custom-rounded-sm 
+        @Html.Raw(curDay.Month == curMonth ? (curDay == DateTime.Today ? "bg-today-date" : "bg-ordinary-date") + " d-block d-sm-table-cell" : "d-none d-sm-table-cell")"
+            @Html.Raw(curDay.Month == curMonth ? $"onclick=\"location.href='/{UserController.CONTROLLER_ROUTE}/{UserController.GET_CALENDAR_MONTH_ROUTE}/{curDay.Day}-{curDay.Month}-{curDay.Year}';\" style=\"cursor: pointer;\"" : "")>
+            
+            <div class="text-center m-2 p-1">
+                @Html.Raw(curDay.Day)
+            </div>
+
+            <div class="d-sm-none text-center m-2 p-1">
+                @curDay.ToString("dddd", CultureInfo.InvariantCulture)
+            </div>
+
+            @if(Model is not null && curDay.Month == curMonth)
+            {
+                DrawTasksPerDay(curDay);
+            }
+
+        </td>
+    }
+    void DrawTasksPerDay(DateTime curDay)
+    {
+        DateTime dateStart = curDay.Date;
+        DateTime dateEnd = curDay.Date.AddDays(1);
+
+        int tasksForToday = Model?.Where(task => task.taskStart < dateEnd && task.taskEnd > dateStart).Count() ?? 0;
+
+        string tasksForTodayMessage = tasksForToday < 1 ? "None tasks" : (tasksForToday >= 1000 ? "Too many tasks": $"{tasksForToday} tasks");
+
+        <div class="text-center m-1">
+            <div>
+                <small>@tasksForTodayMessage</small>
+            </div>
+            <div>
+                @if(curDay == DateTime.Today)
+                {
+                    <small>for today</small>
+                }
+                else
+                {
+                    <small>for that day</small>
+                }
+            </div>
+        </div>
+    }
+}

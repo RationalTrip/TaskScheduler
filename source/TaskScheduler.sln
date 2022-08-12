@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.Web", "TaskScheduler.Web\TaskScheduler.Web.csproj", "{1FC2823F-8806-4EAE-809C-1916ACC1E393}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.Domain", "TaskScheduler.Domain\TaskScheduler.Domain.csproj", "{D863024E-8198-46F5-ADFE-C67EB494BB4B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.Model", "TaskScheduler.Model\TaskScheduler.Model.csproj", "{7264F175-67AD-4743-AF2C-D4497A729A3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.Database", "TaskScheduler.Database\TaskScheduler.Database.csproj", "{57F879A1-7F6B-4F2F-ADDA-5743CE569D10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.Application", "TaskScheduler.Application\TaskScheduler.Application.csproj", "{08C714FC-4C61-4649-8439-EFC020350789}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{41A9EE3C-94A5-402B-86D1-06A3DE1C1A79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleTaskCreateModel", "ScheduleTaskCreateModel", "{0CBB59E6-82FF-4755-AEA6-357A6D16A808}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPeriod.json = Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPeriod.json
+		Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPriorityData.json = Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidPriorityData.json
+		Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidStartTimeData.json = Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidStartTimeData.json
+		Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidTitleData.json = Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelInValidTitleData.json
+		Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelValidData.json = Tests\TestData\ScheduleTaskCreateModel\ScheduleTaskCreateModelValidData.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoginAuthSignInModel", "LoginAuthSignInModel", "{900C8FEE-0667-47A1-BFAC-C59BCD662972}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginAndPasswordData.json = Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginAndPasswordData.json
+		Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginData.json = Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidLoginData.json
+		Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidPasswordData.json = Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelInValidPasswordData.json
+		Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelValidData.json = Tests\TestData\LoginAuthSignInModel\LoginAuthSignInModelValidData.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoginAuthRegisterModel", "LoginAuthRegisterModel", "{215DD8EF-0E19-4E9D-BE9C-3572A388714D}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidConfirmPasswordData.json = Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidConfirmPasswordData.json
+		Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginAndPasswordData.json = Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginAndPasswordData.json
+		Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginData.json = Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidLoginData.json
+		Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidPasswordData.json = Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelInValidPasswordData.json
+		Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelValidData.json = Tests\TestData\LoginAuthRegisterModel\LoginAuthRegisterModelValidData.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleTaskLink", "ScheduleTaskLink", "{F4513585-A768-4655-BD67-80A08F43A6F1}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\TestData\ScheduleTaskLink\ScheduleTaskLinkInValidData.json = Tests\TestData\ScheduleTaskLink\ScheduleTaskLinkInValidData.json
+		Tests\TestData\ScheduleTaskLink\ScheduleTaskLinkValidData.json = Tests\TestData\ScheduleTaskLink\ScheduleTaskLinkValidData.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.DatabaseTests", "Tests\TaskScheduler.DatabaseTests\TaskScheduler.DatabaseTests.csproj", "{AE506671-0D86-42E5-B6E7-561B2F88806C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskScheduler.ApplicationTests", "Tests\TaskScheduler.ApplicationTests\TaskScheduler.ApplicationTests.csproj", "{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FC2823F-8806-4EAE-809C-1916ACC1E393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC2823F-8806-4EAE-809C-1916ACC1E393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC2823F-8806-4EAE-809C-1916ACC1E393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC2823F-8806-4EAE-809C-1916ACC1E393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D863024E-8198-46F5-ADFE-C67EB494BB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D863024E-8198-46F5-ADFE-C67EB494BB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D863024E-8198-46F5-ADFE-C67EB494BB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D863024E-8198-46F5-ADFE-C67EB494BB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7264F175-67AD-4743-AF2C-D4497A729A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7264F175-67AD-4743-AF2C-D4497A729A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7264F175-67AD-4743-AF2C-D4497A729A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7264F175-67AD-4743-AF2C-D4497A729A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F879A1-7F6B-4F2F-ADDA-5743CE569D10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F879A1-7F6B-4F2F-ADDA-5743CE569D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F879A1-7F6B-4F2F-ADDA-5743CE569D10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F879A1-7F6B-4F2F-ADDA-5743CE569D10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C714FC-4C61-4649-8439-EFC020350789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C714FC-4C61-4649-8439-EFC020350789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C714FC-4C61-4649-8439-EFC020350789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C714FC-4C61-4649-8439-EFC020350789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE506671-0D86-42E5-B6E7-561B2F88806C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE506671-0D86-42E5-B6E7-561B2F88806C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE506671-0D86-42E5-B6E7-561B2F88806C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE506671-0D86-42E5-B6E7-561B2F88806C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA} = {41A9EE3C-94A5-402B-86D1-06A3DE1C1A79}
+		{0CBB59E6-82FF-4755-AEA6-357A6D16A808} = {87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA}
+		{900C8FEE-0667-47A1-BFAC-C59BCD662972} = {87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA}
+		{215DD8EF-0E19-4E9D-BE9C-3572A388714D} = {87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA}
+		{F4513585-A768-4655-BD67-80A08F43A6F1} = {87353A96-C2B4-4826-8E5E-B1E3ABCB2AAA}
+		{AE506671-0D86-42E5-B6E7-561B2F88806C} = {41A9EE3C-94A5-402B-86D1-06A3DE1C1A79}
+		{D67E4B8F-BEE5-4E94-BFA2-D29C486B1A7C} = {41A9EE3C-94A5-402B-86D1-06A3DE1C1A79}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C0B4A25-8FF0-494B-887E-31F72B4A8427}
+	EndGlobalSection
+EndGlobal

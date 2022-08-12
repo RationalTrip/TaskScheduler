@@ -1,0 +1,101 @@
+﻿@model IEnumerable<IndividualTask>
+@{
+    DateTime calendarDate = (DateTime)ViewData[WebCommon.CurrentCalendarDate];
+
+    int individualTasksCount = Model?.Count() ?? 0;
+}
+
+<h1>Calendar for @Html.Raw(calendarDate.Date == DateTime.Today ? "Today" : "") @calendarDate.ToString("dd/MM/yyyy")</h1>
+
+<partial name="_info" />
+
+<div class="container-fluid my-4">
+    <div class="container my-2">
+        <h1 class="text-center">
+            <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_YEAR_ROUTE" 
+            asp-route-arg="@($"{calendarDate.Year}")" class="text-decoration-none">
+                @calendarDate.Year
+            </a>
+        </h1>
+    </div>
+
+    <div class="container my-1">
+        <h2 class="text-center">
+            <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_MONTH_ROUTE" 
+            asp-route-arg="@($"{calendarDate.Month}-{calendarDate.Year}")" class="text-decoration-none">
+                @calendarDate.ToString("MMMM", CultureInfo.InvariantCulture)
+            </a>
+        </h2>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_DAY_ROUTE" 
+                    asp-route-arg="@($"{calendarDate.AddDays(-1).Day}-{calendarDate.AddDays(-1).Month}-{calendarDate.AddDays(-1).Year}")">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </div>
+
+            <div class="col-2 text-dark text-center h3">
+                @calendarDate.Day 
+            </div>
+
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_DAY_ROUTE" 
+                    asp-route-arg="@($"{calendarDate.AddDays(1).Day}-{calendarDate.AddDays(1).Month}-{calendarDate.AddDays(1).Year}")">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <p>You have @Html.Raw(individualTasksCount == 0 ? "no" : individualTasksCount) Tasks for @Html.Raw(calendarDate.Date == DateTime.Today ? "today" : "that day").</p>
+
+    @if (individualTasksCount != 0)
+    {
+        foreach (var individualTask in Model)
+        {
+            <div class="container border border-dark m-1 p-2 rounded" 
+                 @Html.Raw($"onclick=\"location.href='/{ScheduleTaskController.CONTROLLER_ROUTE}/{ScheduleTaskController.GET_SCHEDULE_TASK_ROUTE}/{individualTask.scheduleTask.Link}';\" style=\"cursor: pointer;\"")>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-7 col-lg-8 text-truncate d-block d-md-inline-block h1 my-4 py-2">
+                        <i class="bi bi-circle-fill @Html.Raw(individualTask.scheduleTask.TaskPriority == TaskPriority.HighPriority ? "text-danger" :
+                                                              (individualTask.scheduleTask.TaskPriority == TaskPriority.NormalPriority? "text-warning" : "text-success"))"
+                           title="@Html.Raw(individualTask.scheduleTask.TaskPriority == TaskPriority.HighPriority ? "High priority" :
+                                                              (individualTask.scheduleTask.TaskPriority == TaskPriority.NormalPriority? "Normal priority" : "Low priority"))"></i>
+                        @individualTask.scheduleTask.Title
+                    </div>
+
+                    <div class="col-sm-6 col-md-5 col-lg-4 d-block d-md-inline-block align-self-sm-center my-2">
+                        <div class="row">
+                            <div class="col-4 d-sm-none"></div>
+
+                            <div class="container-fluid col-8 col-sm-12 row text-center">
+                                <div class="col-4 align-self-center">
+                                    <span class="d-block"><small>@individualTask.taskStart.ToString("HH:mm")</small></span>
+                                    @Html.Raw(calendarDate.Date == individualTask.taskStart.Date ? "" :
+                                        $"<span class=\"d-block\"><small>{individualTask.taskStart.ToString("dd.MM.yyyy")}</small></span>")
+                                </div>
+
+                                <div class="col-4 align-self-center">
+                                    <hr class="border border-primary" />
+                                </div>
+
+                                <div class="col-4 align-self-center">
+                                    <span class="d-block"><small>@individualTask.taskEnd.ToString("HH:mm")</small></span>
+                                    @Html.Raw(calendarDate.Date == individualTask.taskEnd.Date ? "" :
+                                        $"<span class=\"d-block\"><small>{individualTask.taskEnd.ToString("dd.MM.yyyy")}</small></span>")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

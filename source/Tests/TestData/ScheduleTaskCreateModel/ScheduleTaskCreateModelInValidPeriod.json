@@ -1,0 +1,68 @@
+[
+  {
+    "Title": "Some valid Titile",
+    "Description": "Some description",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 2,
+    "IsRepetitive": true,
+    "RepetitivePeriod": -1,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  },
+  {
+    "Title": "Have a breakfast",
+    "Description": "Do not forget about vegetables",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 1,
+    "IsRepetitive": true,
+    "RepetitivePeriod": 10,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  },
+  {
+    "Title": "T",
+    "Description": "",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 2,
+    "IsRepetitive": true,
+    "RepetitivePeriod": -2,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  },
+  {
+    "Title": "not empty title",
+    "Description": "",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 0,
+    "IsRepetitive": true,
+    "RepetitivePeriod": 0,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  },
+  {
+    "Title": "Title",
+    "Description": "1892hdj",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 1,
+    "IsRepetitive": true,
+    "RepetitivePeriod": 5,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  },
+  {
+    "Title": "12513",
+    "Description": "",
+    "TaskStart": "2022-01-02T16:01:01",
+    "TaskEnd": "2022-01-02T18:01:01",
+    "TaskPriority": 2,
+    "IsRepetitive": true,
+    "RepetitivePeriod": 17,
+    "RepetitiveStart": "2022-01-02T01:01:01",
+    "RepetitiveEnd": "2022-01-16T01:01:01"
+  }
+]

@@ -1,0 +1,121 @@
+﻿@model ScheduleTaskCreateModel
+
+<h1>Create Task</h1>
+
+<partial name="_info" />
+
+<div asp-validation-summary="ModelOnly"></div>
+<div>
+    <form id="createTaskForm" method="post" asp-action="@ScheduleTaskController.CREATE_SCHEDULE_TASK_ROUTE" asp-controller="@ScheduleTaskController.CONTROLLER_ROUTE">
+        <div>
+            <div class="container my-4">
+                <label for="Title" class="form-label">Input the Title of the task:</label>
+
+                <div class="input-group">
+                    <input class="form-control" asp-for="Title" />
+
+                    <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                        <span class="span-validator d-none" asp-validation-for="Title"></span>
+                        <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <label for="Description" class="form-label">Input the Description of the task:</label>
+
+                <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+            </div>
+
+            <div class="container my-4">
+                <label for="TaskPriority" class="form-label">Select priority for the task:</label>
+
+                <select class="form-select" asp-for="TaskPriority">
+                    <option value="@TaskPriority.LowPriority">Low Priority</option>
+                    <option selected value="@TaskPriority.NormalPriority">Normal Priority</option>
+                    <option value="@TaskPriority.HighPriority">High Priority</option>
+                </select>
+            </div>
+            
+            <div class="container my-4">
+                <label for="TaskStart" class="form-label">Intput task start time:</label>
+
+                <div class="input-group">
+                    <input class="form-control" asp-for="TaskStart" asp-format="{0:dd/MM/yyyy HH:mm}" class="form-control" />
+
+                    <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                        <span class="span-validator d-none" asp-validation-for="TaskStart"></span>
+                        <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <label for="TaskEnd" class="form-label">Input task ends time:</label>
+
+                <div class="input-group">
+                    <input class="form-control" asp-for="TaskEnd" asp-format="{0:dd/MM/yyyy HH:mm}" class="form-control" />
+
+                    <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                        <span class="span-validator d-none" asp-validation-for="TaskEnd"></span>
+                        <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="IsRepetitive"
+                        data-bs-toggle="collapse" data-bs-target="#repetitiveDiv" aria-expanded="@Model.IsRepetitive" aria-controls="repetitiveDiv">
+
+                    <label class="form-check-label" for="IsRepetitive">
+                        Select is task repetitive
+                    </label>
+                </div>
+            </div>
+
+            <div id="repetitiveDiv" class="collapse">
+                <div class="container my-4">
+                    <label for="RepetitivePeriod" class="form-label">Select repetitive period of the task:</label>
+
+                    <select class="form-select" asp-for="RepetitivePeriod">
+                        <option value="@TaskRepetitivePeriod.Daily">Daily</option>
+                        <option selected value="@TaskRepetitivePeriod.Weekly">Weekly</option>
+                        <option value="@TaskRepetitivePeriod.Monthly">Monthly</option>
+                        <option value="@TaskRepetitivePeriod.Yearly">Yearly</option>
+                    </select>
+                </div>
+                
+                <div class="container my-4">
+                    <label for="RepetitiveStart" class="form-label">Repetits of the task starts:</label>
+
+                    <input class="form-control" asp-for="RepetitiveStart" asp-format="{0:dd/MM/yyyy}" class="form-control" readonly />
+                </div>
+                
+                <div class="container my-4">
+                    <label for="RepetitiveStart" class="form-label">Input when repetits of the task ends:</label>
+
+                    <div class="input-group">
+                        <input class="form-control" asp-for="RepetitiveEnd" asp-format="{0:dd/MM/yyyy}" class="form-control" />
+
+                        <span class="d-inline-block input-group-text" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="All good">
+                            <span class="span-validator d-none" asp-validation-for="RepetitiveEnd"></span>
+                            <i class="bi bi-exclamation-circle-fill text-danger blink"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <input type="submit" value="submit" class="btn btn-outline-secondary" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/js/create-task-events.js"></script>
+    <script src="~/js/create-task-additional-validation.js" defer></script>
+}

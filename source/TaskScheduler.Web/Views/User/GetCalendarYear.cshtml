@@ -1,0 +1,124 @@
+﻿@model IEnumerable<IndividualTask>
+@{
+    DateTime calendarDate = (DateTime)ViewData[WebCommon.CurrentCalendarDate];
+
+    DateTime curentMonth = new DateTime(calendarDate.Year, 1, 1);
+}
+
+<h1>Calendar for @Html.Raw(calendarDate.Year == DateTime.Today.Year ? "current year" : "") @DateTime.Today.ToString("yyyy")</h1>
+
+<partial name="_info" />
+
+<div class="container-fluid my-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_YEAR_ROUTE" asp-route-arg="@($"{calendarDate.AddYears(-1).Year}")">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </div>
+
+            <div class="col-2 text-dark text-center h3">
+                @calendarDate.Year
+            </div>
+
+            <div class="col-2 text-center h3">
+                <a asp-controller="@UserController.CONTROLLER_ROUTE" asp-action="@UserController.GET_CALENDAR_YEAR_ROUTE" asp-route-arg="@($"{calendarDate.AddYears(1).Year}")">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="container">
+    <tbody>
+        @for (int month = 1; month <= 4; month++)
+        {
+            <tr>
+                @for (int i = 0; i < 3; i++, curentMonth = curentMonth.AddMonths(1))
+                {
+                    
+                    <td class="m-1 m-md-0 p-3 p-md-0 rounded custom-rounded-md d-block d-md-table-cell border border-dark 
+                                    @Html.Raw(curentMonth.AddDays(DateTime.Today.Day - 1) == DateTime.Today? "bg-today-date" : "bg-ordinary-date")"
+                        @Html.Raw($"onclick=\"location.href='/{UserController.CONTROLLER_ROUTE}/{UserController.GET_CALENDAR_MONTH_ROUTE}/{curentMonth.Month}-{curentMonth.Year}';\" style=\"cursor: pointer;\"")>
+                        
+                        <div class="text-center m-2">
+                            <span>@Html.Raw(curentMonth.ToString("MMMM", CultureInfo.InvariantCulture))</span>
+                        </div>
+                        
+                        @if(Model is not null)
+                        {
+                            DrawTasksPerMonth(curentMonth);
+                        }
+                        
+                        <div class="container row">
+                            <div class="col-3 col-md-1 col-lg-2"></div>
+
+                            @{DrawCalendar(curentMonth);}
+
+                            <div class="col-3 col-md-1 col-lg-2"></div>
+                        </div>
+                    </td>
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions{
+    void DrawCalendar(DateTime curMonth)
+    {
+        DateTime calendarIterator = curMonth.AddDays(-(int)curMonth.DayOfWeek);
+
+        int nextMonth = curMonth.AddMonths(1).Month;
+
+    <div class="col-6 col-md-10 col-lg-8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    @for (int dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+                            {
+                                        <td class="border-right border-bottom border-left border-light text-center p-0">
+                                            @Html.Raw(calendarIterator.AddDays(dayOfWeek).ToString("ddd", CultureInfo.InvariantCulture))
+                                        </td>
+                            }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @while (calendarIterator.Month != nextMonth)
+                        {
+                                    <tr>
+                                        @for (int dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++, calendarIterator = calendarIterator.AddDays(1))
+                                {
+                                            <td class="border border-light text-left p-0">
+                                                @Html.Raw(calendarIterator.Month == curMonth.Month ? calendarIterator.Day : "")
+                                            </td>
+                                }
+                                    </tr>
+                        }
+                            </tbody>
+                        </table>
+    </div>
+    }
+
+    void DrawTasksPerMonth(DateTime curMonth)
+    {
+        DateTime dateStart = curMonth.Date;
+        DateTime dateEnd = curMonth.Date.AddMonths(1);
+
+        int tasksForToday = Model.Where(task => task.taskStart < dateEnd && task.taskEnd > dateStart).Count();
+        
+        string tasksForTodayMessage = tasksForToday < 1 ? "None tasks" : (tasksForToday >= 1000 ? "Too many tasks": $"{tasksForToday} tasks");
+
+    <div class="text-center m-1">
+                <div>
+                    <small>@tasksForTodayMessage</small>
+                </div>
+                <div>
+                    <small>for that month</small>
+                </div>
+    </div>
+    }
+}

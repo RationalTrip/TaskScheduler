@@ -1,0 +1,19 @@
+﻿@model ScheduleTask
+
+<div>
+    <div class="my-4 mx-1">
+        <p class="text-truncate h1 p-2">
+            <i class="bi bi-circle-fill @Html.Raw(Model.TaskPriority == TaskPriority.HighPriority ? "text-danger" :
+                                                              (Model.TaskPriority == TaskPriority.NormalPriority? "text-warning" : "text-success"))"
+               title="@Html.Raw(Model.TaskPriority == TaskPriority.HighPriority ? "High priority" :
+                                                              (Model.TaskPriority == TaskPriority.NormalPriority? "Normal priority" : "Low priority"))"></i>
+            @Model.Title
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col text-truncate-3-line my-1 mx-2">
+            @Model.Description
+        </div>
+    </div>
+</div>
