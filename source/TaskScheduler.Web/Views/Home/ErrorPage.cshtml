@@ -1,7 +1,17 @@
-﻿@{
+﻿@model String
+
+@{
     int statusCode = Context.Response.StatusCode;
 }
 
-<h1>Error happened @Html.Raw(statusCode > 400? statusCode:"").</h1>
+@if (string.IsNullOrWhiteSpace(Model))
+{
+    <h1>Error happened @Html.Raw(statusCode > 400? statusCode:"")</h1>
+}
+else
+{
+    <h1>@Model</h1>
+}
+
 
 <partial name="_info" />

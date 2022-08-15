@@ -18,7 +18,8 @@ namespace TaskScheduler.Web
         [Route("~/", Name = "default")]
         public IActionResult Index() => View();
 
-        [Route(ERROR_PAGE_ROUTE)]
-        public IActionResult ErrorPage() => View();
+        [Route(ERROR_PAGE_ROUTE + "/{message?}")]
+        //[Route(ERROR_PAGE_ROUTE)]
+        public IActionResult ErrorPage(string message = null) => View((object)message?.Replace('_', ' '));
     }
 }

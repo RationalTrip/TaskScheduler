@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,12 +48,15 @@ namespace TaskScheduler.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler($"/{HomeController.CONTROLLER_ROUTE}/{HomeController.ERROR_PAGE_ROUTE}");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             context.Database.EnsureCreated();
+
+            app.UseStatusCodePagesWithRedirects($"/{HomeController.CONTROLLER_ROUTE}/{HomeController.ERROR_PAGE_ROUTE}/"
+                + "Page not found".Replace(' ', '_'));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
